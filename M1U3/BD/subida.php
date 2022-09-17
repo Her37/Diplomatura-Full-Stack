@@ -1,18 +1,27 @@
 <?php
 
-require'conexion.php';
-session_start();
+$host= "localhost";
+$usuario = "root";
+$clave = "";
+$bd = "formulario";
 
-$nombre=$_POST['nombre'];
-$apellido=$_POST['apellido'];
-$telefono=$_POST['telefono'];
+$conexion = mysqli_connect($host, $usuario,$clave,$bd)
+or die(mysqli_error($mysquli));
 
-echo $apiKey;
+if($conexion)
+{ echo "Conectado";}
+else{
+	echo "No se pudo conectar";
+}
 
-$consulta="INSERT INTO formulario(nombre, apellido, telefono) VALUES ('$nombre','$apellido','$telefono')";
-$resultado=mysqli_query($conexion,$consulta);
-$filas=mysqli_fetch_array($resultado);
-mysqli_free_result($resultado);
+$Nombre = $_POST['Nombre'];
+$Apellido = $_POST['Apellido'];
+$Telefono = $_POST['Telefono'];
+
+$consulta = "INSERT INTO consultascv(Nombre, Apellido, Telefono) 
+VALUES ('$Nombre','$Apellido','$Telefono')";
+
+mysqli_query($conexion,$consulta);
 mysqli_close($conexion);
 
 ?>
